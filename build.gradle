@@ -1,0 +1,32 @@
+plugins {
+    id 'java-library'
+    id 'application'
+    id "io.spring.dependency-management" version "1.0.9.RELEASE"  
+    id 'maven'
+}
+
+mainClassName = "com.weather.WeatherReportApplication"
+
+jar {
+  manifest { 
+    attributes "Main-Class": "$mainClassName"
+  }  
+
+  from {
+    configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+  }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()    
+}
+
+dependencies {
+    compile group: 'org.springframework', name: 'spring-core', version: '5.2.4.RELEASE'
+    compile group: 'org.springframework', name: 'spring-context', version: '5.2.4.RELEASE'
+    compile group: 'org.springframework', name: 'spring-web', version: '5.2.4.RELEASE'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.3'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.3'
+    compile group: 'org.apache.maven.plugins', name: 'maven-assembly-plugin', version: '3.2.0'        
+}
